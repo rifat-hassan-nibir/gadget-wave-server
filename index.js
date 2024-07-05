@@ -6,7 +6,7 @@ const app = express();
 
 // middleware
 const corsOptions = {
-  origin: ["http://localhost:5173", "http://localhost:5174", "https://gadget-wave.web.app/"],
+  origin: ["http://localhost:5173", "http://localhost:5174", "https://gadget-wave.web.app"],
   credentials: true,
   optionSuccessStatus: 200,
 };
