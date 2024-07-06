@@ -28,9 +28,6 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-
     const porductsCollection = client.db("gadgetWave").collection("products");
 
     // get all prodects data
