@@ -28,11 +28,18 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    const porductsCollection = client.db("gadgetWave").collection("products");
+    const productsCollection = client.db("gadgetWave").collection("products");
 
     // get all prodects data
     app.get("/products", async (req, res) => {
-      const result = await porductsCollection.find().toArray();
+      const categoryFilter = req.query.category;
+      const brandFilter = req.query.brand;
+      let query = {};
+
+      if (categoryFilter) query = { category: categoryFilter };
+      if (brandFilter) query = { brand: brandFilter };
+
+      const result = await productsCollection.find(query).toArray();
       res.send(result);
     });
 
@@ -40,7 +47,7 @@ async function run() {
     app.get("/product/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
-      const result = await porductsCollection.findOne(query);
+      const result = await productsCollection.findOne(query);
       res.send(result);
     });
 
